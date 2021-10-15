@@ -1,0 +1,31 @@
+using System.Collections;
+using MarketFrenzy.Managers;
+using UnityEngine;
+
+namespace MarketFrenzy
+{
+    public class Trophy : MonoBehaviour
+    {
+        public GameObject NewText;
+        public Transform TrophyPrefabSpawnPoint;
+        public Transform ArrowPos;
+        GameObject trophy;
+        ProgressManager.Achievement Achievement;
+        [HideInInspector]
+        public bool IsUnlocked;
+
+        public void Init(ProgressManager.Achievement achievement)
+        {
+            Instantiate(achievement.Prefab, TrophyPrefabSpawnPoint.position, Random.rotation, TrophyPrefabSpawnPoint);
+            Achievement = achievement;
+        }
+
+        void Update()
+        {
+
+            trophy.SetActive(Achievement.Unlocked);
+            NewText.SetActive(Achievement.IsNew);
+        }
+    }
+}
+
